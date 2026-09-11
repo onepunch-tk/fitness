@@ -34,3 +34,6 @@
       <domain>.composition.ts   Composition Root. 어댑터를 유스케이스에 주입하는 유일한 장소.
   - src/common: 위와 같은 4계층 구조의 공통 모듈 (Id, DomainException, UseCase 계약, DB 클라이언트, Screen 래퍼 등)
   - 데모 도메인: workout
+
+**반드시 하면 안되는 행동**
+  - 깃 커밋 시 메세지에 create by "agent name" 같은 내용을 넣어서는 안된다. 즉, 어떤 AI 모델이 커밋했는지 작성자를 남기자 말라.
