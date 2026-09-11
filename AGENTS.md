@@ -32,7 +32,7 @@
         <name>.schema.ts   이 도메인이 소유하는 테이블 정의
       presentation/        zustand store, screens, components
       <domain>.composition.ts   Composition Root. 어댑터를 유스케이스에 주입하는 유일한 장소.
-  - src/common: 위와 같은 4계층 구조의 공통 모듈 (Id, DomainException, UseCase 계약, DB 클라이언트, Screen 래퍼 등)
+  - src/shared: 위와 같은 4계층 구조의 공통 모듈 (Id, DomainException, UseCase 계약, DB 클라이언트, Screen 래퍼 등)
   - 데모 도메인: workout
 
 **반드시 하면 안되는 행동**
