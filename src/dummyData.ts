@@ -411,19 +411,16 @@ export default [
     exercises: [
       {
         id: 'cc58d94a-6345-48d6-b8f4-94dc0196a6e3',
-
         name: 'Deadlift',
         sets: [
           {
             id: '99277feb-11ba-4a49-b604-49551b23c15b',
-
             reps: 7,
             weight: 90,
             oneRM: 108,
           },
           {
             id: 'bf85bf7a-b658-4ba2-961a-9f71d6728213',
-
             reps: 9,
             weight: 110,
             oneRM: 141.42857142857144,
@@ -439,19 +436,16 @@ export default [
     exercises: [
       {
         id: 'c54355e3-cc6f-4254-928b-246884c61929',
-
         name: 'Squat',
         sets: [
           {
             id: 'c1a86f63-2d83-43bd-8987-dc361fc2f969',
-
             reps: 10,
             weight: 80,
             oneRM: 106.66666666666666,
           },
           {
             id: '915bffb6-7e0e-4346-948d-a78236cab354',
-
             reps: 5,
             weight: 111,
             oneRM: 124.875,
@@ -467,7 +461,6 @@ export default [
     exercises: [
       {
         id: '3fd3a2af-99b5-4fdb-b3cb-b39936c2cae7',
-
         name: 'Bench Press',
         sets: [],
       },
