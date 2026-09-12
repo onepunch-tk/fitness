@@ -23,3 +23,12 @@ export const findBestSet = (sets: readonly ExerciseSet[]): ExerciseSet | null =>
 
     return currentSet.oneRm > bestSet.oneRm ? currentSet : bestSet;
   }, null);
+
+export const calculateWorkoutDurationMinutes = (
+  workout: Workout,
+): number | null =>
+  workout.finishedAt === null
+    ? null
+    : Math.floor(
+        (workout.finishedAt.getTime() - workout.createdAt.getTime()) / 60_000,
+      );

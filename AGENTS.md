@@ -9,7 +9,7 @@
   - 이 프로젝트는 구조는 domain-first 수직 슬라이스 구조를 사용한다.
   - expo router(선언적 파일 베이스 라우터)를 존중하되, 도메인 중심으로 폴더를 생성한다.
   - 예를 들어 user 라는 도메인은 src/user 라는 디렉토리를 생성하고 이 디렉토리에서 infrastructure, application, presentaion 등을 선언한다. 
-  - 공통 모듈의 경우 common 디렉토리를 만들며, 이 디렉토리의 구조도 위와 같다.
+  - 공통 모듈의 경우 shared 디렉토리를 만들며, 이 디렉토리의 구조도 위와 같다.
 
 **라이러리**
   - expo sdk 57

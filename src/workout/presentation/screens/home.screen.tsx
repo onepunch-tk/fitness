@@ -1,14 +1,24 @@
 import { Link } from 'expo-router';
+import { useEffect, useState } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
-/* 임시 dummy data*/
-import workouts from '@/dummyData';
 import CustomButton from '@/shared/presentation/components/custom-button.component';
 import { ThemedView } from '@/shared/presentation/components/themed.component';
+import type { Workout } from '@/workout/domain/entities/workout.entity';
+import { workoutListUsecase } from '@/workout/workout.composition';
 import WorkoutListItem from '../components/workout-list-item.component';
 
 export default function HomeScreen() {
+  const [workouts, setWorkouts] = useState<Workout[]>([]);
+  useEffect(() => {
+    const fetchWorkoutList = async () => {
+      const data = await workoutListUsecase.execute();
+      setWorkouts(data);
+    };
+
+    fetchWorkoutList();
+  }, []);
   return (
-    <ThemedView style={styles.contianer}>
+    <ThemedView style={styles.container}>
       <Link href="/workout/current" asChild>
         <CustomButton title="Resume workout" type="primary" />
       </Link>
@@ -24,10 +34,10 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  contianer: {
+  container: {
     flex: 1,
     gap: 10,
     padding: 10,
-    backgroundColor: 'tranparent',
+    backgroundColor: 'transparent',
   },
 });
