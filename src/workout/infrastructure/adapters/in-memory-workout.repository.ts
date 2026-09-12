@@ -1,3 +1,4 @@
+import type { Id } from '@/shared/domain/id';
 import type { WorkoutRepository } from '@/workout/application/ports/workout-repository.port';
 import type { Workout } from '@/workout/domain/entities/workout.entity';
 import { reconstituteWorkout } from '../../domain/entities/workout.entity';
@@ -535,6 +536,12 @@ const inMemoryWorkouts = [
 ];
 
 export class InMemoryWorkoutRepository implements WorkoutRepository {
+  async findById(id: Id): Promise<Workout | null> {
+    const workout = inMemoryWorkouts.find((w) => w.id === id);
+    if (!workout) return null;
+
+    return this.toWorkout(workout);
+  }
   async findAll(): Promise<Workout[]> {
     return inMemoryWorkouts.map(this.toWorkout);
   }
