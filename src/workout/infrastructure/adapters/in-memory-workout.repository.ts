@@ -1,6 +1,6 @@
 import type { WorkoutRepository } from '@/workout/application/ports/workout-repository.port';
 import type { Workout } from '@/workout/domain/entities/workout.entity';
-import { reconstituWorkout } from '../../domain/entities/workout.entity';
+import { reconstituteWorkout } from '../../domain/entities/workout.entity';
 
 const inMemoryWorkouts = [
   {
@@ -540,7 +540,7 @@ export class InMemoryWorkoutRepository implements WorkoutRepository {
   }
 
   private toWorkout(raw: (typeof inMemoryWorkouts)[number]): Workout {
-    return reconstituWorkout({
+    return reconstituteWorkout({
       id: raw.id,
       createdAt: new Date(raw.createdAt),
       finishedAt: raw.finishedAt ? new Date(raw.finishedAt) : null,

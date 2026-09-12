@@ -5,13 +5,13 @@ export interface Workout {
   readonly id: Id;
   readonly createdAt: Date;
   readonly finishedAt: Date | null;
-  readonly exercises: Exercise[];
+  readonly exercises: readonly Exercise[];
 }
 
 export interface Exercise {
   readonly id: Id;
   readonly name: string;
-  readonly sets: ExerciseSet[];
+  readonly sets: readonly ExerciseSet[];
 }
 
 export interface ExerciseSet {
@@ -35,7 +35,7 @@ export function createWorkout(): Workout {
  * 영속 데이터로부터 복원하는 팩토리.
  * 어댑터는 raw → props 매핑(Date 변환, null → undefined)만 하고 이 함수를 통해 엔티티를 만든다.
  */
-export function reconstituWorkout(props: Workout): Workout {
+export function reconstituteWorkout(props: Workout): Workout {
   if (props.finishedAt && props.finishedAt < props.createdAt) {
     throw new DomainException(
       `finishedAt(${props.finishedAt.toISOString()})은 createdAt(${props.createdAt.toISOString()})보다 앞설 수 없다`,
