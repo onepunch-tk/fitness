@@ -1,12 +1,13 @@
 import { useLocalSearchParams } from 'expo-router';
-import { Text, View } from 'react-native';
 import type { Id } from '@/shared/domain/id';
+import { ThemedView } from '@/shared/presentation/components/themed.component';
+import { ThemedText } from '../../../shared/presentation/components/themed.component';
 
 export default function WorkoutDetailScreen() {
   const { id } = useLocalSearchParams<{ id: Id }>();
   return (
-    <View>
-      <Text>Workout Detail Screen: {id}</Text>
-    </View>
+    <ThemedView>
+      <ThemedText>Workout Detail Screen: {id}</ThemedText>
+    </ThemedView>
   );
 }
