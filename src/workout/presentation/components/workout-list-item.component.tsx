@@ -5,7 +5,7 @@ import {
   ThemedText,
   ThemedView,
 } from '@/shared/presentation/components/themed.component';
-import { dateFormatter } from '@/shared/shared.composition';
+import { toDateString } from '@/shared/presentation/formatters/date.formatter';
 import type { Workout } from '@/workout/domain/entities/workout.entity';
 import {
   calculateWorkoutDurationMinutes,
@@ -27,7 +27,7 @@ const formatDuration = (minutes: number | null) => {
 export default function WorkoutListItem({ workout }: WorkoutListItem) {
   return (
     <Card
-      title={dateFormatter.toDateString(workout.createdAt, 'MM월 DD일 HH:mm')}
+      title={toDateString(workout.createdAt, 'MM월 DD일 HH:mm')}
       style={styles.container}
       href={`/workout/${workout.id}`}
     >

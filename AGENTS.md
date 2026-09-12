@@ -19,18 +19,19 @@
 
 **구조 (뼈대)**
   - 의존 방향: presentation → application → domain. infrastructure는 application의 포트(인터페이스)를 구현하는 어댑터다. domain은 아무 계층도 import하지 않는다.
-  - 파일명은 `<이름>.<역할>.ts` 접미사 규칙을 따른다 (*.entity.ts, *.port.ts, *.use-case.ts, *.repository.ts, *.schema.ts, *.store.ts, *.screen.tsx).
+  - 역할이 있는 파일은 `<이름>.<역할>.ts` 형식으로 이름 짓는다 (예: *.entity.ts, *.port.ts, *.use-case.ts, *.repository.ts, *.screen.tsx). 구체 접미사는 열거하지 않으며, 역할을 드러내는 이름이면 된다.
   - src/app: expo-router 라우트. 화면 컴포넌트를 연결만 하고 로직을 두지 않는다. 루트 레이아웃(_layout.tsx)이 각 도메인 스키마를 모아 DB를 초기화한다.
   - src/<domain>/
       domain/
         entities/          엔티티 + 팩토리(불변식). 위반 시 DomainException을 던진다.
+        services/          순수 함수 도메인 서비스(계산·규칙). 엔티티만 의존한다.
       application/
         ports/             유스케이스가 필요로 하는 인터페이스 (리포지토리 등). 구현체는 모른다.
         use-cases/         유스케이스. 포트에만 의존한다.
       infrastructure/
         adapters/          포트 구현체 (sqlite-<name>.repository.ts)
         <name>.schema.ts   이 도메인이 소유하는 테이블 정의
-      presentation/        zustand store, screens, components
+      presentation/        store, screens, components, formatters 등 UI 관심사
       <domain>.composition.ts   Composition Root. 어댑터를 유스케이스에 주입하는 유일한 장소.
   - src/shared: 위와 같은 4계층 구조의 공통 모듈 (Id, DomainException, UseCase 계약, DB 클라이언트, Screen 래퍼 등)
   - 데모 도메인: workout
