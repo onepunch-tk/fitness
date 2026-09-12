@@ -3,9 +3,9 @@ import { gernerateId, type Id } from '@/shared/domain/id';
 
 export interface Workout {
   readonly id: Id;
-  createdAt: Date;
-  finishedAt: Date | null;
-  exercises: Exercise[];
+  readonly createdAt: Date;
+  readonly finishedAt: Date | null;
+  readonly exercises: Exercise[];
 }
 
 export interface Exercise {
