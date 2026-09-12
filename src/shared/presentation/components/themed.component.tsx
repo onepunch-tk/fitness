@@ -6,17 +6,23 @@ import {
 } from 'react-native';
 import { createStyleSheet } from '../stylesheet';
 
-export function Text({ style, ...props }: ComponentProps<typeof NativeText>) {
+export function ThemedText({
+  style,
+  ...props
+}: ComponentProps<typeof NativeText>) {
   const { color } = useStyles().text;
   return <NativeText style={[{ color }, style]} {...props} />;
 }
 
-export function View({ style, ...props }: ComponentProps<typeof NativeView>) {
+export function ThemedView({
+  style,
+  ...props
+}: ComponentProps<typeof NativeView>) {
   const { backgroundColor } = useStyles().view;
   return <NativeView style={[{ backgroundColor }, style]} {...props} />;
 }
 
-export function TextInput({
+export function ThemedTextInput({
   style,
   ...props
 }: ComponentProps<typeof NativeTextInput>) {
