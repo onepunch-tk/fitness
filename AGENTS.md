@@ -19,7 +19,7 @@
 
 **구조 (뼈대)**
   - 의존 방향: presentation → application → domain. infrastructure는 application의 포트(인터페이스)를 구현하는 어댑터다. domain은 아무 계층도 import하지 않는다.
-  - 파일명은 `<이름>.<역할>.ts` 접미사 규칙을 따른다 (*.entity.ts, *.port.ts, *.use-case.ts, *.repository.ts, *.schema.ts, *.store.ts, *.screen.tsx, *.service.ts, *.exception.ts, *.formatter.ts, *.component.tsx, *.provider.tsx).
+  - 역할이 있는 파일은 `<이름>.<역할>.ts` 형식으로 이름 짓는다 (예: *.entity.ts, *.port.ts, *.use-case.ts, *.repository.ts, *.screen.tsx). 구체 접미사는 열거하지 않으며, 역할을 드러내는 이름이면 된다.
   - src/app: expo-router 라우트. 화면 컴포넌트를 연결만 하고 로직을 두지 않는다. 루트 레이아웃(_layout.tsx)이 각 도메인 스키마를 모아 DB를 초기화한다.
   - src/<domain>/
       domain/
