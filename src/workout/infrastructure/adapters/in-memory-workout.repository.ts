@@ -1,4 +1,7 @@
-export default [
+import type { WorkoutRepository } from '@/workout/application/ports/workout.repository.port';
+import type { Workout } from '@/workout/domain/entities/workout.entity';
+
+const inMemoryWorkouts = [
   {
     id: 'ea578a01-9581-4fc7-9423-8ad0eb7c5fc6',
     createdAt: '2024-09-25T17:17:46.393Z',
@@ -479,7 +482,6 @@ export default [
     exercises: [
       {
         id: 'c2a0e0e0-78e7-4234-85a5-123f9dad5f14',
-        workoutId: '43687359-b694-4164-8411-e6a425199bab',
         name: 'Squat',
         sets: [],
       },
@@ -492,12 +494,10 @@ export default [
     exercises: [
       {
         id: 'e6e95e91-ff50-46bb-bd9f-97a4c22d8f14',
-        workoutId: '2d7de2e0-b532-4279-9270-160839a04985',
         name: 'Squat',
         sets: [
           {
             id: 'e9fd8427-1f8f-4a8d-bbc5-7fd0a99e1c2b',
-            exerciseId: 'e6e95e91-ff50-46bb-bd9f-97a4c22d8f14',
             reps: 10,
             weight: 70.5,
             oneRm: 93.65,
@@ -513,12 +513,10 @@ export default [
     exercises: [
       {
         id: '33eb1061-47cc-4b15-a9d2-50462d4025df',
-        workoutId: '9f1ec004-257f-4e5e-a24a-3494a1c7557c',
         name: 'Bench Press',
         sets: [
           {
             id: '9ac72f13-e77e-4055-95be-83b1f948de79',
-            exerciseId: '33eb1061-47cc-4b15-a9d2-50462d4025df',
             reps: 8,
             weight: 80.25,
             oneRm: 100.31,
@@ -534,3 +532,27 @@ export default [
     exercises: [],
   },
 ];
+
+export class InMemoryWorkoutRepository implements WorkoutRepository {
+  async findAll(): Promise<Workout[]> {
+    return inMemoryWorkouts.map(this.toWorkout);
+  }
+
+  private toWorkout(raw: (typeof inMemoryWorkouts)[number]): Workout {
+    return {
+      id: raw.id,
+      createdAt: new Date(raw.createdAt),
+      finishedAt: raw.finishedAt ? new Date(raw.finishedAt) : null,
+      exercises: raw.exercises.map((e) => ({
+        id: e.id,
+        name: e.name,
+        sets: e.sets.map((s) => ({
+          id: s.id,
+          reps: s.reps,
+          weight: s.weight ?? undefined,
+          oneRm: s.oneRm ?? undefined,
+        })),
+      })),
+    };
+  }
+}
