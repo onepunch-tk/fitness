@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 import { createStyleSheet } from 'stylo-native';
+import type { Id } from '@/shared/domain/id';
 import CustomButton from '@/shared/presentation/components/custom-button.component';
 import {
   ThemedText,
@@ -8,22 +9,30 @@ import {
   ThemedView,
 } from '@/shared/presentation/components/themed.component';
 import type { ExerciseSet } from '@/workout/domain/entities/workout.entity';
+import { useWorkoutStore } from '../store/workout.store';
 
 type SetItem = {
   index: number;
   set: ExerciseSet;
+  workoutExerciseId: Id;
 };
 
-export default function SetItem({ index, set }: SetItem) {
+export default function SetItem({ index, set, workoutExerciseId }: SetItem) {
   const [weight, setWeight] = useState(set.weight?.toString() || '');
   const [reps, setReps] = useState(set.reps?.toString() || '');
+  const updateSet = useWorkoutStore((s) => s.updateSet);
+  const deleteSet = useWorkoutStore((s) => s.deleteSet);
 
-  const handleWeightChange = () => {};
-  const handleRepsChagne = () => {};
+  const handleWeightChange = () => {
+    updateSet(workoutExerciseId, set.id, { weight: parseFloat(weight) });
+  };
+  const handleRepsChagne = () => {
+    updateSet(workoutExerciseId, set.id, { reps: parseInt(reps, 10) });
+  };
 
   const renderRightActions = () => (
     <CustomButton
-      onPress={() => console.log('Deleting set: ', set.id)}
+      onPress={() => deleteSet(workoutExerciseId, set.id)}
       title="Delete"
       type="link"
       style={{ width: 'auto', padding: 5 }}

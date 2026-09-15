@@ -16,12 +16,22 @@ export const calculateWorkoutVolume = (workout: Workout): number =>
     0,
   );
 
+export const getOneRm = (set: ExerciseSet | null): number | null => {
+  if (set === null || set.weight === undefined || set.reps === undefined)
+    return null;
+
+  return set.weight * (36.0 / (37.0 - set.reps));
+};
+
 export const findBestSet = (sets: readonly ExerciseSet[]): ExerciseSet | null =>
   sets.reduce<ExerciseSet | null>((bestSet, currentSet) => {
-    if (currentSet.oneRm == null) return bestSet;
-    if (bestSet?.oneRm == null) return currentSet;
+    const currentSetOneRm = getOneRm(currentSet);
+    const bestSetOneRm = getOneRm(bestSet);
 
-    return currentSet.oneRm > bestSet.oneRm ? currentSet : bestSet;
+    if (bestSetOneRm === null) return currentSet;
+    if (currentSetOneRm === null) return bestSet;
+
+    return currentSetOneRm > bestSetOneRm ? currentSet : bestSet;
   }, null);
 
 export const calculateWorkoutDurationMinutes = (

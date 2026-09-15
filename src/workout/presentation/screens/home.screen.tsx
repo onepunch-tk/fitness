@@ -1,28 +1,30 @@
-import { Link } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { Link, router } from 'expo-router';
 import { FlatList } from 'react-native';
 import { createStyleSheet } from 'stylo-native';
 import CustomButton from '@/shared/presentation/components/custom-button.component';
 import { ThemedView } from '@/shared/presentation/components/themed.component';
-import type { Workout } from '@/workout/domain/entities/workout.entity';
-import { workoutListUsecase } from '@/workout/workout.composition';
 import WorkoutListItem from '../components/workout-list-item.component';
+import { useWorkoutStore } from '../store/workout.store';
 
 export default function HomeScreen() {
-  const [workouts, setWorkouts] = useState<Workout[]>([]);
-  useEffect(() => {
-    const fetchWorkoutList = async () => {
-      const data = await workoutListUsecase.execute();
-      setWorkouts(data);
-    };
+  const currentWorkout = useWorkoutStore((s) => s.currentWorkout);
+  const startWorkout = useWorkoutStore((s) => s.startWorkout);
+  const workouts = useWorkoutStore((s) => s.workouts);
 
-    fetchWorkoutList();
-  }, []);
+  const handleStartWorkout = () => {
+    startWorkout();
+    router.push('/workout/current');
+  };
+
   return (
     <ThemedView style={styles.container}>
-      <Link href="/workout/current" asChild>
-        <CustomButton title="Resume workout" type="primary" />
-      </Link>
+      {currentWorkout ? (
+        <Link href="/workout/current" asChild>
+          <CustomButton title="Resume workout" type="primary" />
+        </Link>
+      ) : (
+        <CustomButton title="Start new workout" onPress={handleStartWorkout} />
+      )}
 
       <FlatList
         data={workouts}
