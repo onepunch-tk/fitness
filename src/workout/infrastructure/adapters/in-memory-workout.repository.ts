@@ -554,6 +554,7 @@ export class InMemoryWorkoutRepository implements WorkoutRepository {
       exercises: raw.exercises.map((e) => ({
         id: e.id,
         name: e.name,
+        exerciseId: '',
         sets: e.sets.map((s) => ({
           id: s.id,
           reps: s.reps,

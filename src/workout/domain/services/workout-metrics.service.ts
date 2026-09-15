@@ -1,13 +1,13 @@
 import type {
-  Exercise,
   ExerciseSet,
   Workout,
+  WorkoutExercise,
 } from '../entities/workout.entity';
 
 export const calculateSetVolume = (set: ExerciseSet): number =>
   (set.weight ?? 0) * (set.reps ?? 0);
 
-export const calculateExerciseVolume = (exercise: Exercise): number =>
+export const calculateExerciseVolume = (exercise: WorkoutExercise): number =>
   exercise.sets.reduce((total, set) => total + calculateSetVolume(set), 0);
 
 export const calculateWorkoutVolume = (workout: Workout): number =>

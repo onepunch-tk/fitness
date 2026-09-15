@@ -4,11 +4,11 @@ import {
   ThemedText,
   ThemedView,
 } from '@/shared/presentation/components/themed.component';
-import type { Exercise } from '@/workout/domain/entities/workout.entity';
+import type { WorkoutExercise } from '@/workout/domain/entities/workout.entity';
 import { findBestSet } from '@/workout/domain/services/workout-metrics.service';
 
 type WorkoutExerciseItem = {
-  exercise: Exercise;
+  exercise: WorkoutExercise;
 };
 
 export default function ExerciseItem({ exercise }: WorkoutExerciseItem) {

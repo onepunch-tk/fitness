@@ -3,6 +3,7 @@ import { FlatList } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { createStyleSheet } from 'stylo-native';
+import ExerciseModal from '@/exercise/presentation/components/exercise-modal.component';
 import CustomButton from '@/shared/presentation/components/custom-button.component';
 import ExerciseLogger from '../components/exercise-logger.component';
 import WorkoutHeader from '../components/workout-header.component';
@@ -35,6 +36,13 @@ export default function CurrentWorkoutScreen() {
             <KeyboardAwareScrollView bottomOffset={20} />
           )}
           ListHeaderComponent={<WorkoutHeader />}
+          ListFooterComponent={
+            <ExerciseModal
+              onSelectExercise={(name) =>
+                console.log('Exercise selected: ', name)
+              }
+            />
+          }
         />
       </SafeAreaView>
     </>

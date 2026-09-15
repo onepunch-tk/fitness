@@ -5,11 +5,12 @@ export interface Workout {
   readonly id: Id;
   readonly createdAt: Date;
   readonly finishedAt: Date | null;
-  readonly exercises: readonly Exercise[];
+  readonly exercises: readonly WorkoutExercise[];
 }
 
-export interface Exercise {
+export interface WorkoutExercise {
   readonly id: Id;
+  readonly exerciseId: Id;
   readonly name: string;
   readonly sets: readonly ExerciseSet[];
 }
