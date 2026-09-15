@@ -4,43 +4,41 @@ import {
   TextInput as NativeTextInput,
   View as NativeView,
 } from 'react-native';
-import { createStyleSheet } from '../stylesheet';
+import { createStyleSheet, useStyles } from 'stylo-native';
 
 export function ThemedText({
   style,
   ...props
 }: ComponentProps<typeof NativeText>) {
-  const { color } = useStyles().text;
-  return <NativeText style={[{ color }, style]} {...props} />;
+  const s = useStyles(styles);
+  return <NativeText style={[s.text, style]} {...props} />;
 }
 
 export function ThemedView({
   style,
   ...props
 }: ComponentProps<typeof NativeView>) {
-  const { backgroundColor } = useStyles().view;
-  return <NativeView style={[{ backgroundColor }, style]} {...props} />;
+  const s = useStyles(styles);
+  return <NativeView style={[s.view, style]} {...props} />;
 }
 
 export function ThemedTextInput({
   style,
   ...props
 }: ComponentProps<typeof NativeTextInput>) {
-  const { color, backgroundColor } = useStyles().textInput;
-  return (
-    <NativeTextInput style={[{ color, backgroundColor }, style]} {...props} />
-  );
+  const s = useStyles(styles);
+  return <NativeTextInput style={[s.textInput, style]} {...props} />;
 }
 
-const useStyles = createStyleSheet(({ colors, spacing, radius }) => ({
+const styles = createStyleSheet((t) => ({
   text: {
-    color: colors.text,
+    color: t.colors.text,
   },
   view: {
-    backgroundColor: colors.background,
+    backgroundColor: t.colors.background,
   },
   textInput: {
-    color: colors.text,
-    backgroundColor: colors.background,
+    color: t.colors.text,
+    backgroundColor: t.colors.textInputBackground,
   },
 }));

@@ -1,7 +1,7 @@
 import { type Href, Link } from 'expo-router';
 import type { ReactNode } from 'react';
 import { Pressable, type StyleProp, type ViewStyle } from 'react-native';
-import { createStyleSheet } from '../stylesheet';
+import { createStyleSheet, useStyles } from 'stylo-native';
 import { ThemedText, ThemedView } from './themed.component';
 
 type Card = {
@@ -12,10 +12,10 @@ type Card = {
 };
 
 export default function Card({ title, href, style, children }: Card) {
-  const styles = useStyles();
+  const s = useStyles(styles);
   const cardContent = (
-    <ThemedView style={[styles.card, style]}>
-      <ThemedText style={styles.title}>{title}</ThemedText>
+    <ThemedView style={[s.card, style]}>
+      <ThemedText style={s.title}>{title}</ThemedText>
       {children}
     </ThemedView>
   );
@@ -31,15 +31,15 @@ export default function Card({ title, href, style, children }: Card) {
   return cardContent;
 }
 
-const useStyles = createStyleSheet(({ colors, spacing, radius }) => ({
+const styles = createStyleSheet((t) => ({
   card: {
     padding: 16,
     borderLeftWidth: 2,
-    borderLeftColor: colors.tint,
+    borderLeftColor: t.colors.tint,
   },
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: spacing.sm,
+    marginBottom: t.spacing.sm,
   },
 }));

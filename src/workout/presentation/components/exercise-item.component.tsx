@@ -1,10 +1,9 @@
-import { StyleSheet } from 'react-native';
+import { createStyleSheet, useStyles } from 'stylo-native';
 import Card from '@/shared/presentation/components/card.component';
 import {
   ThemedText,
   ThemedView,
 } from '@/shared/presentation/components/themed.component';
-import { createStyleSheet } from '@/shared/presentation/stylesheet';
 import type { Exercise } from '@/workout/domain/entities/workout.entity';
 import { findBestSet } from '@/workout/domain/services/workout-metrics.service';
 
@@ -12,32 +11,24 @@ type WorkoutExerciseItem = {
   exercise: Exercise;
 };
 
-export default function WorkoutExerciseItem({ exercise }: WorkoutExerciseItem) {
+export default function ExerciseItem({ exercise }: WorkoutExerciseItem) {
   const bestSet = findBestSet(exercise.sets);
-  const { highlightRow } = useStyles();
+  const s = useStyles(styles);
 
   return (
     <Card title={exercise.name}>
       {exercise.sets.map((exerciseSet, index) => (
         <ThemedView
           key={exerciseSet.id}
-          style={[
-            styles.setRow,
-            {
-              backgroundColor:
-                bestSet?.id === exerciseSet.id
-                  ? highlightRow.backgroundColor + 50
-                  : 'transparent',
-            },
-          ]}
+          style={[s.setRow, bestSet?.id === exerciseSet.id && s.highlightRow]}
         >
-          <ThemedText style={styles.setIndex}>{index + 1}</ThemedText>
-          <ThemedText style={styles.setInfo}>
+          <ThemedText style={s.setIndex}>{index + 1}</ThemedText>
+          <ThemedText style={s.setInfo}>
             {exerciseSet.reps}{' '}
             {exerciseSet.weight ? `x ${exerciseSet.weight}kg` : 'reps'}
           </ThemedText>
           {exerciseSet.oneRm && (
-            <ThemedText style={styles.setOneRm}>
+            <ThemedText style={s.setOneRm}>
               {Math.floor(exerciseSet.oneRm)} kg
             </ThemedText>
           )}
@@ -47,8 +38,16 @@ export default function WorkoutExerciseItem({ exercise }: WorkoutExerciseItem) {
   );
 }
 
-const styles = StyleSheet.create({
-  setRow: { flexDirection: 'row', gap: 8, padding: 8 },
+const styles = createStyleSheet((t) => ({
+  setRow: {
+    flexDirection: 'row',
+    gap: 8,
+    padding: 8,
+    backgroundColor: 'transparent',
+  },
+  highlightRow: {
+    backgroundColor: `${t.colors.tint}50`,
+  },
   setIndex: {
     fontSize: 16,
     color: 'gray',
@@ -60,11 +59,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 'auto',
     fontWeight: 'bold',
-  },
-});
-
-const useStyles = createStyleSheet(({ colors }) => ({
-  highlightRow: {
-    backgroundColor: colors.tint,
   },
 }));
