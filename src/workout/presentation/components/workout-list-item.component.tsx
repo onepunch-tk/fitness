@@ -1,5 +1,6 @@
 import { FontAwesome5 } from '@react-native-vector-icons/fontawesome5';
 import { StyleSheet } from 'react-native';
+import { createStyleSheet } from 'stylo-native';
 import Card from '@/shared/presentation/components/card.component';
 import {
   ThemedText,
@@ -72,7 +73,7 @@ export default function WorkoutListItem({ workout }: WorkoutListItem) {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = createStyleSheet({
   container: {
     gap: 8,
   },

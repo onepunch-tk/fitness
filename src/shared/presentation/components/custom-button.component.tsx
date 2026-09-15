@@ -1,6 +1,6 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react';
 import { Pressable, type StyleProp, View, type ViewStyle } from 'react-native';
-import { createStyleSheet } from '../stylesheet';
+import { createStyleSheet, useStyles, useTheme } from 'stylo-native';
 import { ThemedText } from './themed.component';
 
 type CustomButton = {
@@ -20,15 +20,16 @@ export default function CustomButton({
   ref,
   ...pressableProps
 }: CustomButton) {
-  const styles = useStyle();
-  const tint = color || styles.tint.color;
+  const s = useStyles(styles);
+  const { colors } = useTheme();
+  const tint = color || colors.tint;
 
   return (
     <Pressable
       ref={ref}
       {...pressableProps}
       style={[
-        styles.button,
+        s.button,
         type === 'outline' && { borderColor: tint, borderWidth: 2 },
         type === 'primary' && { backgroundColor: tint },
         type === 'link' && { backgroundColor: 'transparent' },
@@ -37,24 +38,24 @@ export default function CustomButton({
     >
       <ThemedText
         style={[
-          styles.buttonText,
+          s.buttonText,
           type === 'outline' && { color: tint },
           type === 'link' && { color: tint },
         ]}
       >
         {title}
       </ThemedText>
-      <View style={styles.rightIconContainer}>{rightIcon}</View>
+      <View style={s.rightIconContainer}>{rightIcon}</View>
     </Pressable>
   );
 }
 
-const useStyle = createStyleSheet(({ colors, spacing, radius }) => ({
+const styles = createStyleSheet((t) => ({
   button: {
-    padding: spacing.lg,
+    padding: t.spacing.lg,
     alignItems: 'center',
     justifyContent: 'center',
-    gap: spacing.lg,
+    gap: t.spacing.lg,
     width: '100%',
   },
   buttonText: {
@@ -66,8 +67,5 @@ const useStyle = createStyleSheet(({ colors, spacing, radius }) => ({
   rightIconContainer: {
     position: 'absolute',
     right: 20,
-  },
-  tint: {
-    color: colors.tint,
   },
 }));

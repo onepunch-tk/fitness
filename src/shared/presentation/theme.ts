@@ -1,3 +1,5 @@
+import { defineThemes } from 'stylo-native';
+
 const tintColorLight = '#00C1A5';
 const tintColorDark = '#56EDDC';
 
@@ -49,3 +51,11 @@ export const themes = {
 };
 
 export type AppTheme = (typeof themes)['light'];
+
+/** stylo-native 시트 팩토리의 `t` 인자가 AppTheme으로 추론되도록 라이브러리 테마 타입을 확장한다. */
+declare module 'stylo-native' {
+  interface StyloTheme extends AppTheme {}
+}
+
+/** 앱에서 딱 한 번, 모듈 스코프에서 정의한다. 실제 테마 선택은 ThemeProvider가 handles로 한다. */
+export const { handles } = defineThemes(themes, 'light');

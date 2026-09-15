@@ -32,3 +32,9 @@ export const calculateWorkoutDurationMinutes = (
     : Math.floor(
         (workout.finishedAt.getTime() - workout.createdAt.getTime()) / 60_000,
       );
+
+/** 시작(createdAt)부터 now까지 경과한 초. 진행 중인 워크아웃의 타이머용. */
+export const calculateWorkoutElapsedSeconds = (
+  workout: Workout,
+  now: Date,
+): number => Math.floor((now.getTime() - workout.createdAt.getTime()) / 1000);

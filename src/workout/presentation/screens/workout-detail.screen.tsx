@@ -1,6 +1,7 @@
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native';
+import { createStyleSheet } from 'stylo-native';
 import type { Id } from '@/shared/domain/id';
 import {
   ThemedText,
@@ -9,7 +10,7 @@ import {
 import { toDateString } from '@/shared/presentation/formatters/date.formatter';
 import type { Workout } from '@/workout/domain/entities/workout.entity';
 import { getWorkoutById } from '@/workout/workout.composition';
-import WorkoutExerciseItem from '../components/workout-exercise-item.component';
+import ExerciseItem from '../components/exercise-item.component';
 
 export default function WorkoutDetailScreen() {
   const { id } = useLocalSearchParams<{ id: Id }>();
@@ -30,7 +31,7 @@ export default function WorkoutDetailScreen() {
         <FlatList
           data={workout.exercises}
           contentContainerStyle={{ gap: 8, padding: 8 }}
-          renderItem={({ item }) => <WorkoutExerciseItem exercise={item} />}
+          renderItem={({ item }) => <ExerciseItem exercise={item} />}
           ListHeaderComponent={
             <>
               <ThemedText style={styles.title}>Workout details</ThemedText>
@@ -45,7 +46,7 @@ export default function WorkoutDetailScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = createStyleSheet({
   title: {
     fontSize: 28,
     fontWeight: 'bold',

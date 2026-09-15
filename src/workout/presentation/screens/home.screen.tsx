@@ -1,6 +1,7 @@
 import { Link } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native';
+import { createStyleSheet } from 'stylo-native';
 import CustomButton from '@/shared/presentation/components/custom-button.component';
 import { ThemedView } from '@/shared/presentation/components/themed.component';
 import type { Workout } from '@/workout/domain/entities/workout.entity';
@@ -33,7 +34,7 @@ export default function HomeScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = createStyleSheet({
   container: {
     flex: 1,
     gap: 10,
