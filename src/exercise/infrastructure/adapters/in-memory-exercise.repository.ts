@@ -1,4 +1,5 @@
 import type { ExerciseRepository } from '@/exercise/application/ports/exercise-repository.port';
+import { reconstituteExercise } from '@/exercise/domain/entities/exercise.entity';
 
 const inMemoryExercises = [
   {
@@ -250,6 +251,6 @@ const inMemoryExercises = [
 
 export class InMemoryExerciseRepository implements ExerciseRepository {
   async findAll() {
-    return inMemoryExercises;
+    return inMemoryExercises.map(reconstituteExercise);
   }
 }

@@ -13,7 +13,7 @@ import {
 } from '@/shared/presentation/components/themed.component';
 
 type ExerciseModal = {
-  onSelectExercise: (name: string) => void;
+  onSelectExercise: (exercise: Exercise) => void;
 };
 
 export default function ExerciseModal({ onSelectExercise }: ExerciseModal) {
@@ -74,8 +74,7 @@ export default function ExerciseModal({ onSelectExercise }: ExerciseModal) {
               renderItem={({ item }) => (
                 <Pressable
                   onPress={() => {
-                    // TODO: notify  the parent about the selected exercise
-                    onSelectExercise(item.name);
+                    onSelectExercise(item);
                     setIsOpen(false);
                   }}
                 >
