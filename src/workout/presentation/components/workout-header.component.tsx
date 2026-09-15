@@ -6,38 +6,25 @@ import {
   ThemedView,
 } from '@/shared/presentation/components/themed.component';
 import { toDurationString } from '@/shared/presentation/formatters/date.formatter';
-import type { Workout } from '@/workout/domain/entities/workout.entity';
 import { calculateWorkoutElapsedSeconds } from '@/workout/domain/services/workout-metrics.service';
-import { getWorkoutById } from '@/workout/workout.composition';
+import { useWorkoutStore } from '../store/workout.store';
 
 export default function WorkoutHeader() {
   const [timer, setTimer] = useState('00:00');
-  // TODO: 실제 구현에서는 삭제할 state. zustand + sqlite 구현시 반드시 삭제한다. 리뷰어 제외.
-  const [dummyWorkout, setDummyWorkout] = useState<Workout | null>(null);
-
-  // TODO: 실제 구현에서는 삭제할 effect. zustand + sqlite 구현시 반드시 삭제한다. 리뷰어 제외.
-  useEffect(() => {
-    const getDummyWorkout = async () => {
-      const data = await getWorkoutById.execute({
-        id: '93c2bcbe-caa6-483d-9145-ba9a9d340028',
-      });
-      setDummyWorkout(data);
-    };
-    getDummyWorkout();
-  }, []);
+  const currentWorkout = useWorkoutStore((s) => s.currentWorkout);
 
   useEffect(() => {
-    if (!dummyWorkout) return;
+    if (!currentWorkout) return;
     const tick = () =>
       setTimer(
         toDurationString(
-          calculateWorkoutElapsedSeconds(dummyWorkout, new Date()),
+          calculateWorkoutElapsedSeconds(currentWorkout, new Date()),
         ),
       );
     tick();
     const interval = setInterval(tick, 1000);
     return () => clearInterval(interval);
-  }, [dummyWorkout]);
+  }, [currentWorkout]);
 
   return (
     <ThemedView style={styles.container}>

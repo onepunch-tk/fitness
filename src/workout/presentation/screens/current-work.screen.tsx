@@ -1,4 +1,4 @@
-import { Stack } from 'expo-router';
+import { Redirect, router, Stack } from 'expo-router';
 import { FlatList } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -7,8 +7,20 @@ import ExerciseModal from '@/exercise/presentation/components/exercise-modal.com
 import CustomButton from '@/shared/presentation/components/custom-button.component';
 import ExerciseLogger from '../components/exercise-logger.component';
 import WorkoutHeader from '../components/workout-header.component';
+import { useWorkoutStore } from '../store/workout.store';
 
 export default function CurrentWorkoutScreen() {
+  const currentWorkout = useWorkoutStore((s) => s.currentWorkout);
+  const finishWorkout = useWorkoutStore((s) => s.finishWorkout);
+  const addExercise = useWorkoutStore((s) => s.addExercise);
+
+  if (!currentWorkout) return <Redirect href="/" />;
+
+  const handleFinishWorkout = () => {
+    finishWorkout();
+    router.dismissTo('/');
+  };
+
   return (
     // <KeyboardAwareList
     //   type="FlatList"
@@ -21,7 +33,7 @@ export default function CurrentWorkoutScreen() {
         options={{
           headerRight: () => (
             <CustomButton
-              onPress={() => console.log('Finish workout')}
+              onPress={handleFinishWorkout}
               title="Finish"
               style={styles.headerButton}
             />
@@ -30,8 +42,8 @@ export default function CurrentWorkoutScreen() {
       />
       <SafeAreaView edges={['bottom']}>
         <FlatList
-          data={[1, 2, 3]}
-          renderItem={() => <ExerciseLogger />}
+          data={currentWorkout?.exercises}
+          renderItem={({ item }) => <ExerciseLogger exercise={item} />}
           renderScrollComponent={() => (
             <KeyboardAwareScrollView bottomOffset={20} />
           )}
@@ -39,7 +51,7 @@ export default function CurrentWorkoutScreen() {
           ListFooterComponent={
             <ExerciseModal
               onSelectExercise={(exercise) =>
-                console.log('Exercise selected: ', exercise)
+                addExercise(exercise.id, exercise.name)
               }
             />
           }

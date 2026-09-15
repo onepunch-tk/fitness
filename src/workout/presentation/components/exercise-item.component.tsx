@@ -5,35 +5,41 @@ import {
   ThemedView,
 } from '@/shared/presentation/components/themed.component';
 import type { WorkoutExercise } from '@/workout/domain/entities/workout.entity';
-import { findBestSet } from '@/workout/domain/services/workout-metrics.service';
+import {
+  findBestSet,
+  getOneRm,
+} from '@/workout/domain/services/workout-metrics.service';
 
 type WorkoutExerciseItem = {
   exercise: WorkoutExercise;
 };
 
 export default function ExerciseItem({ exercise }: WorkoutExerciseItem) {
+  console.log(exercise.sets);
   const bestSet = findBestSet(exercise.sets);
+
   const s = useStyles(styles);
 
   return (
     <Card title={exercise.name}>
-      {exercise.sets.map((exerciseSet, index) => (
-        <ThemedView
-          key={exerciseSet.id}
-          style={[s.setRow, bestSet?.id === exerciseSet.id && s.highlightRow]}
-        >
-          <ThemedText style={s.setIndex}>{index + 1}</ThemedText>
-          <ThemedText style={s.setInfo}>
-            {exerciseSet.reps}{' '}
-            {exerciseSet.weight ? `x ${exerciseSet.weight}kg` : 'reps'}
-          </ThemedText>
-          {exerciseSet.oneRm && (
-            <ThemedText style={s.setOneRm}>
-              {Math.floor(exerciseSet.oneRm)} kg
+      {exercise.sets.map((exerciseSet, index) => {
+        const oneRm = getOneRm(exerciseSet);
+        return (
+          <ThemedView
+            key={exerciseSet.id}
+            style={[s.setRow, bestSet?.id === exerciseSet.id && s.highlightRow]}
+          >
+            <ThemedText style={s.setIndex}>{index + 1}</ThemedText>
+            <ThemedText style={s.setInfo}>
+              {exerciseSet.reps}{' '}
+              {exerciseSet.weight ? `x ${exerciseSet.weight}kg` : 'reps'}
             </ThemedText>
-          )}
-        </ThemedView>
-      ))}
+            {oneRm && (
+              <ThemedText style={s.setOneRm}>{Math.floor(oneRm)} kg</ThemedText>
+            )}
+          </ThemedView>
+        );
+      })}
     </Card>
   );
 }

@@ -1,29 +1,21 @@
 import { useLocalSearchParams } from 'expo-router';
-import { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { createStyleSheet } from 'stylo-native';
+import { useShallow } from 'zustand/shallow';
 import type { Id } from '@/shared/domain/id';
 import {
   ThemedText,
   ThemedView,
 } from '@/shared/presentation/components/themed.component';
 import { toDateString } from '@/shared/presentation/formatters/date.formatter';
-import type { Workout } from '@/workout/domain/entities/workout.entity';
-import { getWorkoutById } from '@/workout/workout.composition';
 import ExerciseItem from '../components/exercise-item.component';
+import { useWorkoutStore } from '../store/workout.store';
 
 export default function WorkoutDetailScreen() {
   const { id } = useLocalSearchParams<{ id: Id }>();
-  const [workout, setWorkout] = useState<Workout | null>(null);
-
-  useEffect(() => {
-    const fetchWorkout = async () => {
-      const workout = await getWorkoutById.execute({ id });
-      setWorkout(workout);
-    };
-
-    fetchWorkout();
-  }, [id]);
+  const workout = useWorkoutStore(
+    useShallow((s) => s.workouts.find((w) => w.id === id)),
+  );
 
   return (
     <ThemedView>
