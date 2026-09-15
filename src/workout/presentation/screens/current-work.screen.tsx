@@ -38,8 +38,8 @@ export default function CurrentWorkoutScreen() {
           ListHeaderComponent={<WorkoutHeader />}
           ListFooterComponent={
             <ExerciseModal
-              onSelectExercise={(name) =>
-                console.log('Exercise selected: ', name)
+              onSelectExercise={(exercise) =>
+                console.log('Exercise selected: ', exercise)
               }
             />
           }

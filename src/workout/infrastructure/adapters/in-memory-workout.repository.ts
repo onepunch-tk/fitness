@@ -11,6 +11,7 @@ const inMemoryWorkouts = [
     exercises: [
       {
         id: 'f5aa8995-73d8-4500-b99b-e0a57e54f0fb',
+        exerciseId: 'bench-press',
         name: 'Bench Press',
         sets: [
           {
@@ -35,6 +36,7 @@ const inMemoryWorkouts = [
       },
       {
         id: '4dcb1962-1f6d-40d0-b355-9ac7cd55bc4d',
+        exerciseId: 'bench-press',
         name: 'Bench Press',
         sets: [
           {
@@ -60,6 +62,7 @@ const inMemoryWorkouts = [
     exercises: [
       {
         id: 'd559ddad-4f95-430b-bc6f-9b4b456ad935',
+        exerciseId: 'barbell-row',
         name: 'Barbell Row',
         sets: [
           {
@@ -84,6 +87,7 @@ const inMemoryWorkouts = [
       },
       {
         id: '33501f61-0c19-4302-bc7b-d876a631cb92',
+        exerciseId: 'romanian-deadlift',
         name: 'Romanian Deadlift',
         sets: [
           {
@@ -108,6 +112,7 @@ const inMemoryWorkouts = [
       },
       {
         id: '49b734ff-593c-40d5-900e-b017e375e202',
+        exerciseId: 'seated-leg-press',
         name: 'Seated Leg Press',
         sets: [
           {
@@ -138,6 +143,7 @@ const inMemoryWorkouts = [
       },
       {
         id: '70123054-fa82-4298-82c5-05b23e382cd8',
+        exerciseId: 'pull-up',
         name: 'Pull-up',
         sets: [
           {
@@ -172,6 +178,7 @@ const inMemoryWorkouts = [
       {
         id: '81e60af0-193c-451c-aa1b-54352fe96e03',
         workoutId: 'c8b9f510-0860-4f20-b5a9-581596bb103b',
+        exerciseId: 'leg-press',
         name: 'Leg Press',
         sets: [
           {
@@ -200,6 +207,7 @@ const inMemoryWorkouts = [
       {
         id: '33bad40a-cc36-4195-9ed0-2f9094944ef7',
         workoutId: 'c8b9f510-0860-4f20-b5a9-581596bb103b',
+        exerciseId: 'leg-curl',
         name: 'Leg Curl',
         sets: [
           {
@@ -228,6 +236,7 @@ const inMemoryWorkouts = [
       {
         id: 'd33a888e-1a50-470e-85c9-fa223099383d',
         workoutId: 'c8b9f510-0860-4f20-b5a9-581596bb103b',
+        exerciseId: 'lunges',
         name: 'Lunges',
         sets: [
           {
@@ -263,6 +272,7 @@ const inMemoryWorkouts = [
       {
         id: '354ed953-6be3-496f-b029-eaf345905ce3',
         workoutId: 'ba325bed-c7ea-42d3-a617-5828f0bbdf4f',
+        exerciseId: 'bench-press',
         name: 'Bench Press',
         sets: [
           {
@@ -291,6 +301,7 @@ const inMemoryWorkouts = [
       {
         id: 'c0d29172-161b-4a1f-8187-6d57165fc5b9',
         workoutId: 'ba325bed-c7ea-42d3-a617-5828f0bbdf4f',
+        exerciseId: 'tricep-pushdown',
         name: 'Tricep Pushdown',
         sets: [
           {
@@ -326,6 +337,7 @@ const inMemoryWorkouts = [
       {
         id: '61dd6099-4f7b-446e-bb35-06213ca585bd',
         workoutId: '773f7b55-869a-4d20-b937-8784616e14a1',
+        exerciseId: 'shrug',
         name: 'Shrug',
         sets: [
           {
@@ -354,6 +366,7 @@ const inMemoryWorkouts = [
       {
         id: 'd6914b44-ed35-4bba-b580-150a6e87c759',
         workoutId: '773f7b55-869a-4d20-b937-8784616e14a1',
+        exerciseId: 'tricep-pushdown',
         name: 'Tricep Pushdown',
         sets: [
           {
@@ -382,6 +395,7 @@ const inMemoryWorkouts = [
       {
         id: '0bd6002c-107e-4b8c-bdca-d4c9b95d2478',
         workoutId: '773f7b55-869a-4d20-b937-8784616e14a1',
+        exerciseId: 'overhead-press',
         name: 'Overhead Press',
         sets: [
           {
@@ -416,6 +430,7 @@ const inMemoryWorkouts = [
     exercises: [
       {
         id: 'cc58d94a-6345-48d6-b8f4-94dc0196a6e3',
+        exerciseId: 'deadlift',
         name: 'Deadlift',
         sets: [
           {
@@ -441,6 +456,7 @@ const inMemoryWorkouts = [
     exercises: [
       {
         id: 'c54355e3-cc6f-4254-928b-246884c61929',
+        exerciseId: 'squat',
         name: 'Squat',
         sets: [
           {
@@ -466,6 +482,7 @@ const inMemoryWorkouts = [
     exercises: [
       {
         id: '3fd3a2af-99b5-4fdb-b3cb-b39936c2cae7',
+        exerciseId: 'bench-press',
         name: 'Bench Press',
         sets: [],
       },
@@ -484,6 +501,7 @@ const inMemoryWorkouts = [
     exercises: [
       {
         id: 'c2a0e0e0-78e7-4234-85a5-123f9dad5f14',
+        exerciseId: 'squat',
         name: 'Squat',
         sets: [],
       },
@@ -496,6 +514,7 @@ const inMemoryWorkouts = [
     exercises: [
       {
         id: 'e6e95e91-ff50-46bb-bd9f-97a4c22d8f14',
+        exerciseId: 'squat',
         name: 'Squat',
         sets: [
           {
@@ -515,6 +534,7 @@ const inMemoryWorkouts = [
     exercises: [
       {
         id: '33eb1061-47cc-4b15-a9d2-50462d4025df',
+        exerciseId: 'bench-press',
         name: 'Bench Press',
         sets: [
           {
@@ -553,8 +573,8 @@ export class InMemoryWorkoutRepository implements WorkoutRepository {
       finishedAt: raw.finishedAt ? new Date(raw.finishedAt) : null,
       exercises: raw.exercises.map((e) => ({
         id: e.id,
+        exerciseId: e.exerciseId,
         name: e.name,
-        exerciseId: '',
         sets: e.sets.map((s) => ({
           id: s.id,
           reps: s.reps,

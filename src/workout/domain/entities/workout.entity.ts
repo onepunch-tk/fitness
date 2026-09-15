@@ -42,6 +42,13 @@ export function reconstituteWorkout(props: Workout): Workout {
       `finishedAt(${props.finishedAt.toISOString()})은 createdAt(${props.createdAt.toISOString()})보다 앞설 수 없다`,
     );
   }
+  for (const exercise of props.exercises) {
+    if (!exercise.exerciseId) {
+      throw new DomainException(
+        `WorkoutExercise(${exercise.id})의 exerciseId는 비어 있을 수 없다`,
+      );
+    }
+  }
 
   return props;
 }
